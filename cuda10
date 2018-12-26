@@ -4,11 +4,12 @@ FROM nvidia/cuda:10.0-base-ubuntu16.04
 RUN apt-get update && apt-get install -y \
     gcc \
     curl \
-    bzip2 \
     ca-certificates \
     sudo \
-    libx11-6 \
+    git \
+    bzip2 \
     libxrender1 \
+    libx11-6 \
     && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user and switch to it
