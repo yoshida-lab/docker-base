@@ -16,12 +16,12 @@ RUN apt-get update && apt-get install -y \
 # All users can use /home/user as their home directory
 RUN adduser --disabled-password --gecos '' --shell /bin/bash user &&\
     echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/90-user &&\
-    mkdir /home/user/workspace && \
-    chown -R user:user /home/user &&\
-    chmod 777 -R /home/user
+    mkdir /workspace && chown -R user:user /workspace &&\
+    mkdir /.xenonpy && chown -R user:user /.xenonpy && ln -sf /.xenonpy /home/user/.xenonpy &&\
+    chmod 777 -R /home/user && chmod 777 -R /workspace && chmod 777 -R /.xenonpy
 USER user
 ENV HOME=/home/user
-WORKDIR /home/user/workspace
+WORKDIR /workspace
 
 
 # Install Miniconda
@@ -45,10 +45,12 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 # use CUDA 10.0-specific steps
 RUN conda install -y -c pytorch \
     pytorch-cpu=1.0.0 \
-    torchvision=0.2.1
+    torchvision=0.2.1 &&\
+    python -c "import torch; print('pytorch %s' % torch.__version__)"
 
 # install rdkit and pymatgen
-RUN conda install -y -c rdkit rdkit=2018.09.1
+RUN conda install -y -c rdkit rdkit=2018.09.1 &&\
+    python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem"
 
 # install other packages
 RUN conda install -y \
@@ -69,8 +71,11 @@ RUN conda install -y \
     sudo apt-get purge gcc  -y\
     && sudo apt-get autoremove -y \
     && sudo apt-get clean -y \ 
-    && sudo rm -rf /var/lib/apt/lists/*
-
+    && sudo rm -rf /var/lib/apt/lists/* &&\
+    python -c "import numpy; print('numpy %s' % numpy.__version__)" &&\
+    python -c "import scipy; print('scipy %s' % scipy.__version__)" &&\
+    python -c "import pandas; print('pandas %s' % pandas.__version__)" &&\
+    python -c "import pymatgen; print('pymatgen %s' % pymatgen.__version__)"
 
 # allow matplotlib working in docker
 WORKDIR /etc
