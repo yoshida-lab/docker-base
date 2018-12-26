@@ -17,12 +17,10 @@ RUN apt-get update && apt-get install -y \
 RUN adduser --disabled-password --gecos '' --shell /bin/bash user &&\
     echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/90-user &&\
     mkdir /workspace && chown -R user:user /workspace &&\
-    mkdir /.xenonpy && chown -R user:user /.xenonpy && ln -sf /.xenonpy /home/user/.xenonpy &&\
-    chmod 777 -R /home/user && chmod 777 -R /workspace && chmod 777 -R /.xenonpy
+    chmod 777 -R /home/user && chmod 777 -R /workspace
 USER user
 ENV HOME=/home/user
 WORKDIR /workspace
-
 
 # Install Miniconda
 RUN curl -so ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh \
