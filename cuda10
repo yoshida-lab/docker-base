@@ -17,7 +17,8 @@ RUN apt-get update && apt-get install -y \
 RUN adduser --disabled-password --gecos '' --shell /bin/bash user &&\
     echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/90-user &&\
     mkdir /workspace && chown -R user:user /workspace &&\
-    chmod 777 -R /home/user && chmod 777 -R /workspace
+    chmod 777 -R /home/user && chmod 777 -R /workspace &&\
+    umask 000    
 USER user
 ENV HOME=/home/user
 WORKDIR /workspace
