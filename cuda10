@@ -17,8 +17,7 @@ RUN apt-get update && apt-get install -y \
 RUN adduser --disabled-password --gecos '' --shell /bin/bash user &&\
     echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/90-user &&\
     mkdir /workspace && chown -R user:user /workspace &&\
-    chmod 777 -R /home/user && chmod 777 -R /workspace &&\
-    umask 000    
+    chmod 777 -R /home/user && chmod 777 -R /workspace
 USER user
 ENV HOME=/home/user
 WORKDIR /workspace
@@ -29,7 +28,8 @@ RUN curl -so ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-4.5.1
     && chmod +x ~/miniconda.sh \
     && ~/miniconda.sh -b -p ~/miniconda \
     && rm ~/miniconda.sh \
-    && /home/user/miniconda/bin/conda update -n base -c defaults conda
+    && /home/user/miniconda/bin/conda update -n base -c defaults conda \
+    && umask 000
 ENV PATH=/home/user/miniconda/bin:$PATH
 ENV CONDA_AUTO_UPDATE_CONDA=false
 
