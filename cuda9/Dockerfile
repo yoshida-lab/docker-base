@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.0-base-ubuntu16.04
+FROM nvidia/cuda:9.0-base-ubuntu16.04
 
 # Install some basic utilities
 RUN apt-get update && apt-get install -y \
@@ -22,6 +22,7 @@ USER user
 ENV HOME=/home/user
 WORKDIR /workspace
 
+
 # Install Miniconda
 RUN curl -so ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh \
     && chmod +x ~/miniconda.sh \
@@ -34,7 +35,7 @@ ENV CONDA_AUTO_UPDATE_CONDA=false
 
 # Create a Python 3.6 environment
 RUN /home/user/miniconda/bin/conda install conda-build \
-    && /home/user/miniconda/bin/conda create -y --name py36 python=3.6.5 \
+    && /home/user/miniconda/bin/conda create -y --name py36 python=3.6.8 \
     && /home/user/miniconda/bin/conda clean -ya
 ENV CONDA_DEFAULT_ENV=py36
 ENV CONDA_PREFIX=/home/user/miniconda/envs/$CONDA_DEFAULT_ENV
@@ -43,9 +44,9 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 # install ppytorch 1.0.0 with CUDA 10.0
 # use CUDA 10.0-specific steps
 RUN conda install -y -c pytorch \
-    cuda100=1.0 \
-    magma-cuda100=2.4.0 \
-    "pytorch=1.0.0=py3.6_cuda10.0.130_cudnn7.4.1_1" \
+    cudatoolkit=9.0 \
+    magma-cuda90=2.5.0 \
+    "pytorch=1.0.1=py3.6_cuda9.0.176_cudnn7.4.2_2" \
     torchvision=0.2.1 &&\
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 
@@ -56,20 +57,18 @@ RUN conda install -y -c rdkit rdkit=2018.09.1 &&\
 # install other packages
 RUN conda install -y \
     jupyter=1.0.0 \
-    scikit-learn=0.20.1 \
-    scipy=1.1.0 \
-    pandas=0.23.4 \
+    scikit-learn=0.20.2 \
+    scipy=1.2.0 \
+    pandas=0.24.1 \
     requests \
     plotly \
     seaborn \
-    pytest=4.0.2 \
-    pytest-cov=2.6.0 \
     && conda clean -ya \
     && pip install \
     jupyterlab \
     pybtex \
     openpyxl \
-    pymatgen==2018.12.12 \
+    pymatgen==2019.2.4 \
     matminer &&\
     sudo apt-get purge gcc  -y\
     && sudo apt-get autoremove -y \
