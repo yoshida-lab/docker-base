@@ -67,6 +67,7 @@ RUN conda install -y \
     && conda clean -ya \
     && pip install \
     jupyterlab \
+    tdqm \
     pybtex \
     openpyxl \
     pymatgen==2019.2.4 \
