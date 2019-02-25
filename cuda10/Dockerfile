@@ -34,7 +34,8 @@ ENV PATH=/home/user/miniconda/bin:$PATH
 ENV CONDA_AUTO_UPDATE_CONDA=false
 
 # Create a Python 3.6 environment
-RUN /home/user/miniconda/bin/conda install conda-build \
+RUN /home/user/miniconda/bin/conda update -n base -c defaults conda \
+    && /home/user/miniconda/bin/conda install conda-build \
     && /home/user/miniconda/bin/conda create -y --name py36 python=3.6.8 \
     && /home/user/miniconda/bin/conda clean -ya
 ENV CONDA_DEFAULT_ENV=py36
@@ -66,19 +67,14 @@ RUN conda install -y \
     && conda clean -ya \
     && pip install \
     jupyterlab \
-    tdqm \
     pybtex \
     mordred \
     tensorly \
     chainer==5.2.0 \
-    cupy==5.2.0 \
+    cupy-cuda100==5.2.0 \
     openpyxl \
     pymatgen==2019.2.4 \
     matminer &&\
-    sudo apt-get purge gcc  -y\
-    && sudo apt-get autoremove -y \
-    && sudo apt-get clean -y \ 
-    && sudo rm -rf /var/lib/apt/lists/* &&\
     python -c "import numpy; print('numpy %s' % numpy.__version__)" &&\
     python -c "import scipy; print('scipy %s' % scipy.__version__)" &&\
     python -c "import pandas; print('pandas %s' % pandas.__version__)" &&\
@@ -86,7 +82,11 @@ RUN conda install -y \
     python -c "import mordred; print('mordred %s' % mordred.__version__)" &&\
     python -c "import tensorly; print('tensorly %s' % tensorly.__version__)" &&\
     python -c "import cupy; print('cupy %s' % cupy.__version__)" &&\
-    python -c "import pymatgen; print('pymatgen %s' % pymatgen.__version__)"
+    python -c "import pymatgen; print('pymatgen %s' % pymatgen.__version__)" &&\
+    sudo apt-get purge gcc  -y\
+    && sudo apt-get autoremove -y \
+    && sudo apt-get clean -y \ 
+    && sudo rm -rf /var/lib/apt/lists/* 
 
 
 # allow matplotlib working in docker
