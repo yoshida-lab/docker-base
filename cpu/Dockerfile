@@ -65,6 +65,9 @@ RUN conda install -y \
     jupyterlab \
     tdqm \
     pybtex \
+    mordred \
+    tensorly \
+    chainer==5.2.0 \
     openpyxl \
     pymatgen==2019.2.4 \
     matminer &&\
@@ -75,6 +78,9 @@ RUN conda install -y \
     python -c "import numpy; print('numpy %s' % numpy.__version__)" &&\
     python -c "import scipy; print('scipy %s' % scipy.__version__)" &&\
     python -c "import pandas; print('pandas %s' % pandas.__version__)" &&\
+    python -c "import chainer; print('chainer %s' % chainer.__version__)" &&\
+    python -c "import mordred; print('mordred %s' % mordred.__version__)" &&\
+    python -c "import tensorly; print('tensorly %s' % tensorly.__version__)" &&\
     python -c "import pymatgen; print('pymatgen %s' % pymatgen.__version__)"
 
 # allow matplotlib working in docker
