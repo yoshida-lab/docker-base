@@ -61,13 +61,13 @@ RUN conda install -y \
     requests \
     plotly \
     seaborn \
+    chainer==5.2.0 \
     && conda clean -ya \
     && pip install \
     jupyterlab \
     pybtex \
     mordred \
     tensorly \
-    chainer==5.2.0 \
     openpyxl \
     pymatgen==2019.2.4 \
     matminer &&\

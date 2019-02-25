@@ -63,6 +63,8 @@ RUN conda install -y \
     requests \
     plotly \
     seaborn \
+    chainer==5.2.0 \
+    cupy==5.1.0 \
     pytest=4.2.0 \
     pytest-cov=2.6.1 \
     && conda clean -ya \
@@ -71,8 +73,6 @@ RUN conda install -y \
     pybtex \
     mordred \
     tensorly \
-    chainer==5.2.0 \
-    cupy-cuda100==5.2.0 \
     openpyxl \
     pymatgen==2019.2.4 \
     matminer &&\
