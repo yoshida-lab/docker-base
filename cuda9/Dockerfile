@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-base-ubuntu16.04
+FROM nvidia/cuda:9.0-base
 
 # Install some basic utilities
 RUN apt-get update && apt-get install -y \
@@ -52,7 +52,7 @@ RUN conda install -y -c pytorch \
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 
 # install rdkit and pymatgen
-RUN conda install -y -c rdkit rdkit=2018.09.1 &&\
+RUN conda install -y -c rdkit rdkit=2018.09.2 &&\
     python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem"
 
 # install other packages
@@ -64,8 +64,6 @@ RUN conda install -y \
     requests \
     plotly \
     seaborn \
-    chainer==5.2.0 \
-    cupy==5.1.0 \
     && conda clean -ya \
     && pip install \
     jupyterlab \
@@ -78,10 +76,8 @@ RUN conda install -y \
     python -c "import numpy; print('numpy %s' % numpy.__version__)" &&\
     python -c "import scipy; print('scipy %s' % scipy.__version__)" &&\
     python -c "import pandas; print('pandas %s' % pandas.__version__)" &&\
-    python -c "import chainer; print('chainer %s' % chainer.__version__)" &&\
     python -c "import mordred; print('mordred %s' % mordred.__version__)" &&\
     python -c "import tensorly; print('tensorly %s' % tensorly.__version__)" &&\
-    python -c "import cupy; print('cupy %s' % cupy.__version__)" &&\
     python -c "import pymatgen; print('pymatgen %s' % pymatgen.__version__)" &&\
     sudo apt-get purge gcc  -y\
     && sudo apt-get autoremove -y \
