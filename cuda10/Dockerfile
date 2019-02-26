@@ -59,7 +59,7 @@ RUN conda install -y -c rdkit rdkit=2018.09.2 &&\
 RUN conda install -y \
     jupyter=1.0.0 \
     scikit-learn=0.20.2 \
-    scipy=1.2.0 \
+    scipy=1.2.1 \
     pandas=0.24.1 \
     requests \
     plotly \
