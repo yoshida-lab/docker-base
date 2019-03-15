@@ -55,9 +55,9 @@ RUN conda install -y -c rdkit rdkit=2018.09.2 &&\
 # install other packages
 RUN conda install -y \
     jupyter=1.0.0 \
-    scikit-learn=0.20.2 \
+    scikit-learn=0.20.3 \
     scipy=1.2.1 \
-    pandas=0.24.1 \
+    pandas=0.24.2 \
     requests \
     plotly \
     seaborn \
@@ -68,7 +68,7 @@ RUN conda install -y \
     mordred \
     tensorly \
     openpyxl \
-    pymatgen==2019.2.4 \
+    pymatgen==2019.3.13 \
     matminer &&\
     python -c "import numpy; print('numpy %s' % numpy.__version__)" &&\
     python -c "import scipy; print('scipy %s' % scipy.__version__)" &&\
