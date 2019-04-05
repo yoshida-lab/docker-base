@@ -66,6 +66,7 @@ RUN conda install -y \
     jupyterlab \
     pybtex \
     mordred \
+    torchtext \
     tensorly \
     openpyxl \
     pymatgen==2019.3.13 \

@@ -70,6 +70,7 @@ RUN conda install -y \
     pybtex \
     mordred \
     tensorly \
+    torchtext \
     openpyxl \
     pymatgen==2019.3.13 \
     matminer &&\
