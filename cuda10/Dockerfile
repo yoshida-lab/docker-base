@@ -72,7 +72,8 @@ RUN conda install -y \
     tensorly \
     torchtext \
     openpyxl \
-    pymatgen==2019.3.13 \
+    ase \
+    pymatgen==2019.4.11 \
     matminer &&\
     python -c "import numpy; print('numpy %s' % numpy.__version__)" &&\
     python -c "import scipy; print('scipy %s' % scipy.__version__)" &&\
