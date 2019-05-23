@@ -57,7 +57,7 @@ RUN conda install -y -c rdkit rdkit=2018.09.2 &&\
 # install other packages
 RUN conda install -y \
     jupyter=1.0.0 \
-    scikit-learn=0.20.3 \
+    scikit-learn=0.21.1 \
     scipy=1.2.1 \
     pandas=0.24.2 \
     requests \
