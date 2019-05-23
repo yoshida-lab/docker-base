@@ -63,7 +63,7 @@ RUN conda install -y \
     requests \
     plotly \
     seaborn \
-    pytest=4.2.0 \
+    pytest=4.5.0 \
     pytest-cov=2.6.1 \
     && conda clean -ya \
     && pip install \
