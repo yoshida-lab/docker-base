@@ -62,6 +62,7 @@ RUN conda install -y \
     pandas=0.24.2 \
     requests \
     plotly \
+    joblib \
     seaborn \
     pytest=4.5.0 \
     pytest-cov=2.6.1 \

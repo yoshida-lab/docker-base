@@ -60,6 +60,7 @@ RUN conda install -y \
     pandas=0.24.2 \
     requests \
     plotly \
+    joblib \
     seaborn \
     && conda clean -ya \
     && pip install \
