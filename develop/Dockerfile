@@ -23,7 +23,7 @@ ENV HOME=/home/user
 WORKDIR /workspace
 
 # Install Miniconda
-RUN curl -so ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh \
+RUN curl -so ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
     && chmod +x ~/miniconda.sh \
     && ~/miniconda.sh -b -p ~/miniconda \
     && rm ~/miniconda.sh \
@@ -35,9 +35,9 @@ ENV CONDA_AUTO_UPDATE_CONDA=false
 # Create a Python 3.6 environment
 RUN /home/user/miniconda/bin/conda update -n base -c defaults conda \
     && /home/user/miniconda/bin/conda install conda-build \
-    && /home/user/miniconda/bin/conda create -y --name py36 python=3.6.8 \
+    && /home/user/miniconda/bin/conda create -y --name py37 python=3.7 \
     && /home/user/miniconda/bin/conda clean -ya
-ENV CONDA_DEFAULT_ENV=py36
+ENV CONDA_DEFAULT_ENV=py37
 ENV CONDA_PREFIX=/home/user/miniconda/envs/$CONDA_DEFAULT_ENV
 ENV PATH=$CONDA_PREFIX/bin:$PATH
 
@@ -46,12 +46,12 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 RUN conda install -y -c pytorch \
     cudatoolkit=10.0 \
     magma-cuda100=2.5.0 \
-    "pytorch=1.0.1=py3.6_cuda10.0.130_cudnn7.4.2_2" \
-    torchvision=0.2.1 &&\
+    "pytorch=1.1.0=py3.7_cuda10.0.130_cudnn7.5.1_0" \
+    torchvision=0.3.0 &&\
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 
 # install rdkit and pymatgen
-RUN conda install -y -c rdkit rdkit=2018.09.2 &&\
+RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
     python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem"
 
 # install other packages
@@ -75,7 +75,7 @@ RUN conda install -y \
     torchtext \
     openpyxl \
     ase \
-    pymatgen==2019.4.11 \
+    pymatgen==2019.5.8 \
     matminer &&\
     python -c "import numpy; print('numpy %s' % numpy.__version__)" &&\
     python -c "import scipy; print('scipy %s' % scipy.__version__)" &&\
