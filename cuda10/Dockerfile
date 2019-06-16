@@ -58,12 +58,13 @@ RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
 # install other packages
 RUN conda install -y \
     jupyter=1.0.0 \
-    scikit-learn=0.21.1 \
+    scikit-learn=0.21.2 \
     scipy=1.2.1 \
     pandas=0.24.2 \
     requests \
     plotly \
     joblib \
+    lz4 \
     seaborn \
     && conda clean -ya \
     && pip install \
@@ -74,7 +75,7 @@ RUN conda install -y \
     torchtext \
     openpyxl \
     ase \
-    pymatgen==2019.5.8 \
+    pymatgen==2019.6.5 \
     matminer &&\
     python -c "import numpy; print('numpy %s' % numpy.__version__)" &&\
     python -c "import scipy; print('scipy %s' % scipy.__version__)" &&\
