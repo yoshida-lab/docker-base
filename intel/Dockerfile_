@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3:latest
+FROM ubuntu:18.04
 
 COPY parallel_studio_xe_2019_update4_composer_edition_online /intel_compiler
 COPY NCOM_L__CPPFOR_NDP5-22BCZDZJ.lic /opt/intel/licenses/
