@@ -1,0 +1,85 @@
+FROM ubuntu:18.04
+
+COPY parallel_studio_xe_2019_update4_composer_edition_online ./intel_compiler
+COPY NCOM_L__CPPFOR_NDP5-22BCZDZJ.lic /opt/intel/licenses/
+
+WORKDIR /intel_compiler
+
+RUN echo "dependences Installing..." \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
+    cpio \
+    build-essential \
+    curl \
+    git \
+    cmake \
+    openssh-server \
+    openssh-client\
+    && rm -rf /var/lib/apt/lists/*  \
+    && apt-get clean
+
+RUN echo "compiler installation" \
+    && ./install.sh --silent=silent.cfg \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN echo "install mpich" \
+    && curl -L http://www.mpich.org/static/downloads/3.3.1/mpich-3.3.1.tar.gz | tar zvx \
+    && cd mpich-3.3.1 \
+    && ./configure \
+    && make install
+# COPY l_mpi_2019 /intel_mpi
+# WORKDIR /intel_mpi
+# RUN echo "MPI installation" \
+#     && ./install.sh --silent=silent.cfg 
+
+WORKDIR /test
+COPY sample.c .
+
+ENV compilervars=/opt/intel/compilers_and_libraries/linux/bin/compilervars.sh
+# # Install some basic utilities
+# RUN apt-get update && apt-get install -y \
+#     gcc \
+#     curl \
+#     ca-certificates \
+#     sudo \
+#     git \
+#     bzip2 \
+#     libxrender1 \
+#     libx11-6 \
+#     && rm -rf /var/lib/apt/lists/*
+
+# # Create a non-root user and switch to it
+# # All users can use /home/user as their home directory
+# RUN adduser --disabled-password --gecos '' --shell /bin/bash user &&\
+#     echo "user ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/90-user &&\
+#     mkdir /workspace && chown -R user:user /workspace &&\
+#     chmod 777 -R /home/user && chmod 777 -R /workspace
+# USER user
+# ENV HOME=/home/user
+# WORKDIR /workspace
+
+# # Install Miniconda
+# RUN curl -so ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+#     && chmod +x ~/miniconda.sh \
+#     && ~/miniconda.sh -b -p ~/miniconda \
+#     && rm ~/miniconda.sh \
+#     && /home/user/miniconda/bin/conda update -n base -c defaults conda \
+#     && umask 000
+# ENV PATH=/home/user/miniconda/bin:$PATH
+# ENV CONDA_AUTO_UPDATE_CONDA=false
+
+# # Create a Python 3.6 environment
+# RUN /home/user/miniconda/bin/conda update -n base -c defaults conda \
+#     && /home/user/miniconda/bin/conda install conda-build \
+#     && /home/user/miniconda/bin/conda create -y --name py37 python=3.7 \
+#     && /home/user/miniconda/bin/conda clean -ya
+# ENV CONDA_DEFAULT_ENV=py37
+# ENV CONDA_PREFIX=/home/user/miniconda/envs/$CONDA_DEFAULT_ENV
+# ENV PATH=$CONDA_PREFIX/bin:$PATH
+
+# # allow matplotlib working in docker
+# WORKDIR /etc
+# RUN echo "backend : Agg" | sudo tee -a matplotlibrc 
+
+# # Set the default command to python3
+# CMD ["python3"]
