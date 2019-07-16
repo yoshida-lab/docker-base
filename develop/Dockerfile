@@ -2,11 +2,9 @@ FROM nvidia/cuda:10.0-base
 
 # Install some basic utilities
 RUN apt-get update && apt-get install -y \
-    gcc \
     curl \
     ca-certificates \
     sudo \
-    git \
     bzip2 \
     libxrender1 \
     libx11-6 \
@@ -55,7 +53,8 @@ RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
     python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem"
 
 # install other packages
-RUN conda install -y \
+RUN apt-get update && apt-get install -y gcc \
+    && conda install -y \
     jupyter=1.0.0 \
     scikit-learn=0.21.2 \
     scipy=1.2.1 \
@@ -68,7 +67,7 @@ RUN conda install -y \
     pytest=4.5.0 \
     pytest-cov=2.6.1 \
     && conda clean -ya \
-    && pip install \
+    && pip install --no-cache-dir \
     jupyterlab \
     pybtex \
     mordred \
