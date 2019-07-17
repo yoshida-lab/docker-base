@@ -53,7 +53,7 @@ RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
     python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem"
 
 # install other packages
-RUN apt-get update && apt-get install -y gcc \
+RUN sudo apt-get update && apt-get install -y gcc \
     && conda install -y \
     jupyter=1.0.0 \
     scikit-learn=0.21.2 \
