@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     sudo \
     bzip2 \
     libxrender1 \
-    libx11-6 \
+    libxext6 \
     && rm -rf /var/lib/apt/lists/*
 
 
