@@ -55,7 +55,8 @@ RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
     python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem"
 
 # install other packages
-RUN sudo apt-get update && apt-get install -y gcc \
+RUN sudo apt-get update \
+    && sudo apt-get install -y gcc \
     && conda install -y \
     jupyter=1.0.0 \
     scikit-learn=0.21.2 \
@@ -71,19 +72,18 @@ RUN sudo apt-get update && apt-get install -y gcc \
     jupyterlab \
     pybtex \
     mordred \
-    tensorly \
     torchtext \
+    tensorly \
     openpyxl \
-    ase \
-    pymatgen==2019.5.28 \
-    matminer &&\
-    python -c "import numpy; print('numpy %s' % numpy.__version__)" &&\
-    python -c "import scipy; print('scipy %s' % scipy.__version__)" &&\
-    python -c "import pandas; print('pandas %s' % pandas.__version__)" &&\
-    python -c "import mordred; print('mordred %s' % mordred.__version__)" &&\
-    python -c "import tensorly; print('tensorly %s' % tensorly.__version__)" &&\
-    python -c "import pymatgen; print('pymatgen %s' % pymatgen.__version__)" &&\
-    sudo apt-get purge gcc  -y\
+    pymatgen==2019.7.2 \
+    matminer\
+    && python -c "import numpy; print('numpy %s' % numpy.__version__)" \
+    && python -c "import scipy; print('scipy %s' % scipy.__version__)" \
+    && python -c "import pandas; print('pandas %s' % pandas.__version__)" \
+    && python -c "import mordred; print('mordred %s' % mordred.__version__)" \
+    && python -c "import tensorly; print('tensorly %s' % tensorly.__version__)" \
+    && python -c "import pymatgen; print('pymatgen %s' % pymatgen.__version__)" \
+    && sudo apt-get purge gcc  -y\
     && sudo apt-get autoremove -y \
     && sudo apt-get clean -y \ 
     && sudo rm -rf /var/lib/apt/lists/* 
