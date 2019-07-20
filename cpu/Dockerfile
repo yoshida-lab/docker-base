@@ -62,6 +62,7 @@ RUN sudo apt-get update \
     plotly \
     joblib \
     lz4 \
+    nodejs \
     seaborn \
     && conda clean -ya \
     && pip install --no-cache-dir \
