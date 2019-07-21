@@ -59,7 +59,6 @@ RUN sudo apt-get update \
     scipy=1.3.0 \
     pandas=0.24.2 \
     requests \
-    plotly \
     joblib \
     lz4 \
     nodejs \
@@ -72,9 +71,11 @@ RUN sudo apt-get update \
     torchtext \
     tensorly \
     openpyxl \
+    plotly \
     pymatgen==2019.7.2 \
     matminer\
-    && jupyter labextension install @jupyterlab/plotly-extension jupyterlab-chart-editor \
+    && jupyter labextension install @jupyterlab/plotly-extension \
+    && jupyter labextension install jupyterlab-chart-editor \
     && python -c "import numpy; print('numpy %s' % numpy.__version__)" \
     && python -c "import scipy; print('scipy %s' % scipy.__version__)" \
     && python -c "import pandas; print('pandas %s' % pandas.__version__)" \
