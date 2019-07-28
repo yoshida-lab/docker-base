@@ -63,6 +63,8 @@ RUN sudo apt-get update \
     lz4 \
     nodejs \
     seaborn \
+    openpyxl \
+    "plotly>=4.0" \
     && conda clean -ya \
     && pip install --no-cache-dir \
     jupyterlab \
@@ -70,8 +72,6 @@ RUN sudo apt-get update \
     mordred \
     torchtext \
     tensorly \
-    openpyxl \
-    plotly \
     pymatgen==2019.7.2 \
     matminer\
     && jupyter labextension install @jupyterlab/plotly-extension \
