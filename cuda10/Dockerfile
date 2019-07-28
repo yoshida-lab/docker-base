@@ -73,6 +73,7 @@ RUN sudo apt-get update \
     pybtex \
     mordred \
     torchtext \
+    tensorly \
     pymatgen==2019.7.2 \
     matminer\
     && jupyter labextension install @jupyterlab/plotly-extension \
