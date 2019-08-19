@@ -73,6 +73,7 @@ RUN sudo apt-get update \
     pybtex \
     mordred \
     torchtext \
+    Python-Deprecated \
     tensorly \
     pymatgen==2019.7.2 \
     matminer\
