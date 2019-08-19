@@ -60,7 +60,7 @@ RUN sudo apt-get update \
     jupyter=1.0.0 \
     scikit-learn=0.21.2 \
     scipy=1.3.0 \
-    pandas=0.24.2 \
+    pandas=0.25.0 \
     requests \
     joblib \
     nodejs \
