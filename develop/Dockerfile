@@ -43,9 +43,10 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 # use CUDA 10.0-specific steps
 RUN conda install -y -c pytorch \
     cudatoolkit=10.0 \
-    magma-cuda100=2.5.0 \
-    "pytorch=1.1.0=py3.7_cuda10.0.130_cudnn7.5.1_0" \
-    torchvision=0.3.0 &&\
+    magma-cuda100=2.5.1 \
+    "pytorch-1.2.0-py3.7_cuda10.0.130_cudnn7.6.2_0" \
+    torchtext=0.4.0 \
+    torchvision=0.4.0 &&\
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 
 # install rdkit and pymatgen
@@ -58,8 +59,8 @@ RUN sudo apt-get update \
     && conda install -y \
     jupyter=1.0.0 \
     scikit-learn=0.21.2 \
-    scipy=1.3.0 \
-    pandas=0.25.0 \
+    scipy=1.3.1 \
+    pandas=0.25.1 \
     requests \
     joblib \
     nodejs \
@@ -76,7 +77,7 @@ RUN sudo apt-get update \
     torchtext \
     Python-Deprecated \
     tensorly \
-    pymatgen==2019.7.2 \
+    pymatgen==2019.9.12 \
     matminer\
     && jupyter labextension install @jupyterlab/plotly-extension \
     && jupyter labextension install jupyterlab-chart-editor \
