@@ -45,7 +45,7 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 RUN conda install -y -c pytorch \
     cudatoolkit=10.0 \
     magma-cuda100=2.5.1 \
-    "pytorch-1.2.0-py3.7_cuda10.0.130_cudnn7.6.2_0" \
+    pytorch=1.2.0 \
     torchvision=0.4.0 &&\
     torchtext=0.4.0 \
     python -c "import torch; print('pytorch %s' % torch.__version__)"

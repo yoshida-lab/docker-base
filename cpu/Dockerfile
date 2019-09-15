@@ -42,8 +42,8 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 # install ppytorch 1.0.0 with CUDA 10.0
 # use CUDA 10.0-specific steps
 RUN conda install -y -c pytorch \
-    pytorch=1.2.0 \
     cpuonly \
+    pytorch=1.2.0 \
     torchtext=0.4.0 \
     torchvision=0.4.0 &&\
     python -c "import torch; print('pytorch %s' % torch.__version__)"
