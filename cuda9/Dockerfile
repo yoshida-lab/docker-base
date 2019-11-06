@@ -49,15 +49,17 @@ RUN conda install -y -c pytorch \
     pytorch=1.3.0 \
     torchtext=0.4.0 \
     torchvision=0.4.1 &&\
+    conda clean -ya && \
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 
 # install rdkit and pymatgen
 RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
+    conda clean -ya && \
     python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem"
 
 # install other packages
 RUN sudo apt-get update \
-    && sudo apt-get install -y gcc g++ nodejs npm\
+    && sudo apt-get install -y gcc g++ \
     && conda install -y \
     jupyter=1.0.0 \
     scikit-learn=0.21.3 \
@@ -67,6 +69,7 @@ RUN sudo apt-get update \
     joblib \
     seaborn \
     openpyxl \
+    nodejs \
     "plotly>=4.0" \
     && conda clean -ya \
     && pip install --no-cache-dir \
@@ -87,7 +90,7 @@ RUN sudo apt-get update \
     && python -c "import mordred; print('mordred %s' % mordred.__version__)" \
     && python -c "import tensorly; print('tensorly %s' % tensorly.__version__)" \
     && python -c "import pymatgen; print('pymatgen %s' % pymatgen.__version__)" \
-    && sudo apt-get purge gcc  -y\
+    && sudo apt-get purge gcc g++ -y\
     && sudo apt-get autoremove -y \
     && sudo apt-get clean -y \ 
     && sudo rm -rf /var/lib/apt/lists/* 
