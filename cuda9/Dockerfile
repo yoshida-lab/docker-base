@@ -32,7 +32,7 @@ RUN curl -so ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-lates
 ENV PATH=/home/user/miniconda/bin:$PATH
 ENV CONDA_AUTO_UPDATE_CONDA=false
 
-# Create a Python 3.6 environment
+# Create a Python 3.7 environment
 RUN /home/user/miniconda/bin/conda update -n base -c defaults conda \
     && /home/user/miniconda/bin/conda install conda-build \
     && /home/user/miniconda/bin/conda create -y --name py37 python=3.7 \
@@ -46,7 +46,7 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 RUN conda install -y -c pytorch \
     cudatoolkit=9.2 \
     magma-cuda92=2.5.1 \
-    pytorch=1.2.0 \
+    pytorch=1.3.0 \
     torchtext=0.4.0 \
     torchvision=0.4.0 &&\
     python -c "import torch; print('pytorch %s' % torch.__version__)"
@@ -60,9 +60,9 @@ RUN sudo apt-get update \
     && sudo apt-get install -y gcc \
     && conda install -y \
     jupyter=1.0.0 \
-    scikit-learn=0.21.2 \
+    scikit-learn=0.21.3 \
     scipy=1.3.1 \
-    pandas=0.25.1 \
+    pandas=0.25.2 \
     requests \
     joblib \
     nodejs \
@@ -77,10 +77,11 @@ RUN sudo apt-get update \
     torchtext \
     Python-Deprecated \
     tensorly \
-    pymatgen==2019.9.12 \
+    pymatgen==2019.10.2 \
     matminer\
-    && jupyter labextension install @jupyterlab/plotly-extension \
-    && jupyter labextension install jupyterlab-chart-editor \
+    && jupyter labextension install --no-build @jupyterlab/plotly-extension \
+    && jupyter labextension install --no-build jupyterlab-chart-editor \
+    && jupyter lab build  --minimize=False\
     && python -c "import numpy; print('numpy %s' % numpy.__version__)" \
     && python -c "import scipy; print('scipy %s' % scipy.__version__)" \
     && python -c "import pandas; print('pandas %s' % pandas.__version__)" \
