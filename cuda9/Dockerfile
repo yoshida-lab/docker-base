@@ -57,7 +57,7 @@ RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
 
 # install other packages
 RUN sudo apt-get update \
-    && sudo apt-get install -y gcc \
+    && sudo apt-get install -y gcc g++ \
     && conda install -y \
     jupyter=1.0.0 \
     scikit-learn=0.21.3 \
