@@ -48,7 +48,7 @@ RUN conda install -y -c pytorch \
     magma-cuda92=2.5.1 \
     pytorch=1.3.0 \
     torchtext=0.4.0 \
-    torchvision=0.4.0 &&\
+    torchvision=0.4.1 &&\
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 
 # install rdkit and pymatgen
