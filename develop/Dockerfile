@@ -55,7 +55,7 @@ RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
 
 # install other packages
 RUN sudo apt-get update \
-    && sudo apt-get install -y gcc g++ \
+    && sudo apt-get install -y gcc g++ nodejs npm\
     && conda install -y \
     jupyter=1.0.0 \
     scikit-learn=0.21.3 \
@@ -63,7 +63,6 @@ RUN sudo apt-get update \
     pandas=0.25.2 \
     requests \
     joblib \
-    nodejs \
     seaborn \
     openpyxl \
     "plotly>=4.0" \
