@@ -72,7 +72,7 @@ RUN sudo apt-get update \
     "plotly>=4.0" \
     && conda clean -ya \
     && pip install --no-cache-dir \
-    jupyterlab \
+    jupyterlab==1.0.0 \
     pybtex \
     mordred \
     torchtext \

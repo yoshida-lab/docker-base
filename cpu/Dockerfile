@@ -1,5 +1,4 @@
 FROM ubuntu:18.04
-ENV DEBCONF_NOWARNINGS yes
 
 # Install some basic utilities
 RUN apt-get update && apt-get install -y \
