@@ -1,8 +1,9 @@
-FROM ubuntu:18.04
+FROM nvidia/cuda:10.1-base
 
 # Install some basic utilities
 RUN apt-get update && apt-get install -y \
     curl \
+    openssh-client \
     ca-certificates \
     sudo \
     bzip2 \
@@ -19,6 +20,7 @@ RUN adduser --disabled-password --gecos '' --shell /bin/bash user &&\
 USER user
 ENV HOME=/home/user
 WORKDIR /workspace
+
 
 # Install Miniconda
 RUN curl -so ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
@@ -42,7 +44,8 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 # install ppytorch 1.0.0 with CUDA 10.0
 # use CUDA 10.0-specific steps
 RUN conda install -y -c pytorch \
-    cpuonly \
+    cudatoolkit=10.1 \
+    magma-cuda101=2.5.1 \
     pytorch=1.3.0 \
     torchtext=0.4.0 \
     torchvision=0.4.1 &&\
@@ -58,19 +61,22 @@ RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
 RUN sudo apt-get update \
     && sudo apt-get install -y gcc g++ \
     && conda install -y \
-    jupyter=1.0.0 \
     scikit-learn=0.21.3 \
     scipy=1.3.1 \
     pandas=0.25.2 \
     requests \
     joblib \
-    lz4 \
     seaborn \
     openpyxl \
     nodejs \
     "plotly>=4.0" \
     && conda clean -ya \
     && pip install --no-cache-dir \
+    git+https://github.com/aiidateam/aiida-core.git#egg=aiida-core[atomic_tools] \
+    && pip install --no-cache-dir \
+    pip install git+https://github.com/aiidateam/aiida-quantumespresso \
+    && pip install --no-cache-dir \
+    jupyterlab_server \
     'jupyterlab>=1.2.0' \
     pybtex \
     mordred \
@@ -88,10 +94,12 @@ RUN sudo apt-get update \
     && python -c "import mordred; print('mordred %s' % mordred.__version__)" \
     && python -c "import tensorly; print('tensorly %s' % tensorly.__version__)" \
     && python -c "import pymatgen; print('pymatgen %s' % pymatgen.__version__)" \
+    && python -c "import aiida; print('aiida-core %s' % aiida.__version__)" \
     && sudo apt-get purge gcc g++ -y\
     && sudo apt-get autoremove -y \
     && sudo apt-get clean -y \ 
     && sudo rm -rf /var/lib/apt/lists/* 
+
 
 # allow matplotlib working in docker
 WORKDIR /etc

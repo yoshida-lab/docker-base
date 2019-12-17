@@ -73,13 +73,13 @@ RUN sudo apt-get update \
     "plotly>=4.0" \
     && conda clean -ya \
     && pip install --no-cache-dir \
-    jupyterlab==1.0.0 \
+    'jupyterlab>=1.2.0' \
     pybtex \
     mordred \
     torchtext \
     Python-Deprecated \
     tensorly \
-    pymatgen==2019.10.2 \
+    pymatgen==2019.12.3 \
     matminer\
     && jupyter labextension install --no-build @jupyterlab/plotly-extension \
     && jupyter labextension install --no-build jupyterlab-chart-editor \
