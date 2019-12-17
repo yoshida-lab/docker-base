@@ -76,7 +76,7 @@ RUN sudo apt-get update \
     && pip install --no-cache-dir \
     git+https://github.com/aiidateam/aiida-core.git#egg=aiida-core[atomic_tools] \
     && pip install --no-cache-dir \
-    pip install git+https://github.com/aiidateam/aiida-quantumespresso \
+    git+https://github.com/aiidateam/aiida-quantumespresso \
     && pip install --no-cache-dir \
     jupyterlab_server \
     jupyterlab==1.0.0 \
