@@ -3,7 +3,6 @@ FROM nvidia/cuda:10.1-base
 # Install some basic utilities
 RUN apt-get update && apt-get install -y \
     curl \
-    openssh-client \
     ca-certificates \
     sudo \
     bzip2 \
@@ -60,6 +59,8 @@ RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
 # install other packages
 RUN sudo apt-get update \
     && sudo apt-get install -y gcc g++ \
+    openssh-client \
+    rabbitmq-server \
     && conda install -y \
     scikit-learn=0.21.3 \
     scipy=1.3.1 \
@@ -98,7 +99,8 @@ RUN sudo apt-get update \
     && sudo apt-get purge gcc g++ -y\
     && sudo apt-get autoremove -y \
     && sudo apt-get clean -y \ 
-    && sudo rm -rf /var/lib/apt/lists/* 
+    && sudo rm -rf /var/lib/apt/lists/* \
+    && sudo systemctl enable rabbitmq-server
 
 
 # allow matplotlib working in docker
