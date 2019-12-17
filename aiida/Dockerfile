@@ -61,6 +61,7 @@ RUN sudo apt-get update \
     && sudo apt-get install -y gcc g++ \
     openssh-client \
     rabbitmq-server \
+    git \
     && conda install -y \
     scikit-learn=0.21.3 \
     scipy=1.3.1 \
