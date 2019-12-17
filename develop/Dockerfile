@@ -73,7 +73,7 @@ RUN sudo apt-get update \
     "pytest-cov=2.7" \
     && conda clean -ya \
     && pip install --no-cache-dir \
-    'jupyterlab>=1.2.0' \
+    jupyterlab==1.0.0 \
     pybtex \
     mordred \
     torchtext \
