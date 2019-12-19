@@ -4,6 +4,8 @@ FROM nvidia/cuda:10.1-base
 RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
+    openssh-client \
+    git \
     sudo \
     bzip2 \
     libxrender1 \
@@ -59,11 +61,8 @@ RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
 # install other packages
 RUN sudo apt-get update \
     && sudo apt-get install -y gcc g++ \
-    openssh-client \
-    rabbitmq-server \
-    systemd \
-    git \
     && conda install -y \
+    jupyter=1.0.0 \
     scikit-learn=0.21.3 \
     scipy=1.3.1 \
     pandas=0.25.2 \
@@ -79,7 +78,6 @@ RUN sudo apt-get update \
     && pip install --no-cache-dir \
     git+https://github.com/aiidateam/aiida-quantumespresso \
     && pip install --no-cache-dir \
-    jupyterlab_server \
     jupyterlab==1.0.0 \
     pybtex \
     mordred \
@@ -101,8 +99,7 @@ RUN sudo apt-get update \
     && sudo apt-get purge gcc g++ -y\
     && sudo apt-get autoremove -y \
     && sudo apt-get clean -y \ 
-    && sudo rm -rf /var/lib/apt/lists/* \
-    && sudo systemctl enable rabbitmq-server
+    && sudo rm -rf /var/lib/apt/lists/*
 
 
 # allow matplotlib working in docker
