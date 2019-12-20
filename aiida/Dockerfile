@@ -84,8 +84,8 @@ RUN sudo apt-get update \
     torchtext \
     Python-Deprecated \
     tensorly \
-    pymatgen==2019.12.3 \
     matminer\
+    && reentry scan \
     && jupyter labextension install --no-build @jupyterlab/plotly-extension \
     && jupyter labextension install --no-build jupyterlab-chart-editor \
     && jupyter lab build  --minimize=False\
