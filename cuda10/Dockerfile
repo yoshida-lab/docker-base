@@ -80,9 +80,11 @@ RUN sudo apt-get update \
     tensorly \
     pymatgen==2019.12.3 \
     matminer\
+    && upyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build @jupyterlab/plotly-extension \
     && jupyter labextension install --no-build jupyterlab-chart-editor \
-    && jupyter lab build  --minimize=False\
+    && jupyter lab build \
+    && jupyter nbextension enable --py widgetsnbextension \
     && python -c "import numpy; print('numpy %s' % numpy.__version__)" \
     && python -c "import scipy; print('scipy %s' % scipy.__version__)" \
     && python -c "import pandas; print('pandas %s' % pandas.__version__)" \
