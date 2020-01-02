@@ -81,7 +81,7 @@ RUN sudo apt-get update \
     tensorly \
     pymatgen==2019.12.3 \
     matminer\
-    && upyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
+    && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build @jupyterlab/plotly-extension \
     && jupyter labextension install --no-build jupyterlab-chart-editor \
     && jupyter lab build \

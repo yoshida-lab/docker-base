@@ -85,7 +85,7 @@ RUN sudo apt-get update \
     Python-Deprecated \
     tensorly \
     matminer\
-    && upyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
+    && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build @jupyterlab/plotly-extension \
     && jupyter labextension install --no-build jupyterlab-chart-editor \
     && jupyter lab build \
