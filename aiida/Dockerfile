@@ -78,7 +78,7 @@ RUN sudo apt-get update \
     && pip install --no-cache-dir \
     git+https://github.com/aiidateam/aiida-quantumespresso \
     && pip install --no-cache-dir \
-    jupyterlab==1.0.0 \
+    jupyterlab \
     pybtex \
     mordred \
     torchtext \
