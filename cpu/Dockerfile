@@ -58,26 +58,30 @@ RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
 RUN sudo apt-get update \
     && sudo apt-get install -y gcc g++ \
     && conda install -y \
-    jupyter=1.0.0 \
-    scikit-learn=0.21.3 \
+    scikit-learn=0.22.1 \
     scipy=1.3.1 \
-    pandas=0.25.2 \
+    pandas=1.0.0 \
     requests \
     joblib \
     lz4 \
     seaborn \
     openpyxl \
     nodejs \
-    "plotly>=4.0" \
     && conda clean -ya \
+    && pip install --upgrade --no-cache-dir \
+    git+https://github.com/stanfordmlgroup/ngboost.git \
     && pip install --no-cache-dir \
-    jupyterlab==1.0.0 \
+    jupyterlab \
+    ipywidgets \
+    widgetsnbextension \
+    xgboost \
+    plotly \
     pybtex \
     mordred \
     torchtext \
     Python-Deprecated \
     tensorly \
-    pymatgen==2019.12.3 \
+    pymatgen==2020.1.28 \
     matminer\
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build @jupyterlab/plotly-extension \
