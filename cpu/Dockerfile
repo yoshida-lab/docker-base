@@ -4,6 +4,8 @@ FROM ubuntu:18.04
 RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
+    openssh-client \
+    git \
     sudo \
     bzip2 \
     libxrender1 \
@@ -43,9 +45,9 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 # use CUDA 10.0-specific steps
 RUN conda install -y -c pytorch \
     cpuonly \
-    pytorch=1.3.0 \
-    torchtext=0.4.0 \
-    torchvision=0.4.1 &&\
+    pytorch=1.4.0 \
+    torchtext=0.5.0 \
+    torchvision=0.5.0 &&\
     conda clean -ya && \
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 

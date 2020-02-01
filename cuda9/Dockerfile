@@ -4,6 +4,8 @@ FROM nvidia/cuda:9.2-base
 RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
+    openssh-client \
+    git \
     sudo \
     bzip2 \
     libxrender1 \
@@ -46,9 +48,9 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 RUN conda install -y -c pytorch \
     cudatoolkit=9.2 \
     magma-cuda92=2.5.1 \
-    pytorch=1.3.0 \
-    torchtext=0.4.0 \
-    torchvision=0.4.1 &&\
+    pytorch=1.4.0 \
+    torchtext=0.5.0 \
+    torchvision=0.5.0 &&\
     conda clean -ya && \
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 
