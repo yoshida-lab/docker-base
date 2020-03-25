@@ -66,12 +66,12 @@ RUN sudo apt-get update \
     scipy=1.3.1 \
     pandas=1.0.0 \
     requests \
-    fastcluster \
     joblib \
     lz4 \
     seaborn \
     openpyxl \
     nodejs \
+    $$ conda install -c conda-forge fastcluster \
     && conda clean -ya \
     && pip install --upgrade --no-cache-dir \
     git+https://github.com/stanfordmlgroup/ngboost.git \
