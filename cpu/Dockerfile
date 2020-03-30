@@ -52,7 +52,7 @@ RUN conda install -y -c pytorch \
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 
 # install rdkit and pymatgen
-RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
+RUN conda install -y -c rdkit rdkit=2020.03.1.0 &&\
     conda clean -ya && \
     python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem"
 
@@ -60,7 +60,7 @@ RUN conda install -y -c rdkit rdkit=2019.03.2.0 &&\
 RUN sudo apt-get update \
     && sudo apt-get install -y gcc g++ \
     && conda install -y \
-    scikit-learn=0.22.2 \
+    scikit-learn=0.22.1 \
     scipy=1.4.1 \
     pandas=1.0.3 \
     requests \
@@ -69,13 +69,13 @@ RUN sudo apt-get update \
     seaborn \
     openpyxl \
     nodejs \
+    jupyterlab \
+    ipywidgets \
+    widgetsnbextension \
     && conda clean -ya \
     && pip install --upgrade --no-cache-dir \
     git+https://github.com/stanfordmlgroup/ngboost.git \
     && pip install --no-cache-dir \
-    jupyterlab \
-    ipywidgets \
-    widgetsnbextension \
     fastcluster \
     xgboost \
     plotly \
