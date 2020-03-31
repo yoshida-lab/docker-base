@@ -89,7 +89,7 @@ RUN sudo apt-get update \
     pymatgen==2020.3.13 \
     matminer\
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
-    && jupyter labextension install --no-build @jupyterlab/plotly-extension \
+    && jupyter labextension install --no-build jupyterlab-plotly \
     && jupyter labextension install --no-build jupyterlab-chart-editor \
     && jupyter lab build \
     && jupyter nbextension enable --py widgetsnbextension \
