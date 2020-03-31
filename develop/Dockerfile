@@ -70,13 +70,13 @@ RUN sudo apt-get update \
     seaborn \
     openpyxl \
     nodejs \
-    jupyterlab \
-    ipywidgets \
-    widgetsnbextension \
     && conda clean -ya \
     && pip install --upgrade --no-cache-dir \
     git+https://github.com/stanfordmlgroup/ngboost.git \
     && pip install --no-cache-dir \
+    jupyterlab \
+    ipywidgets \
+    widgetsnbextension \
     fastcluster \
     xgboost \
     plotly \
