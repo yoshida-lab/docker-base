@@ -45,10 +45,10 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 # use CUDA 10.0-specific steps
 RUN conda install -y -c pytorch \
     cudatoolkit=10.1 \
-    magma-cuda101=2.5.1 \
-    pytorch=1.4.0 \
-    torchtext=0.5.0 \
-    torchvision=0.5.0 &&\
+    magma-cuda101=2.5.2 \
+    pytorch=1.6.0 \
+    torchtext=0.7.0 \
+    torchvision=0.7.0 &&\
     conda clean -ya && \
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 
@@ -61,9 +61,9 @@ RUN conda install -y -c rdkit rdkit=2020.03.1.0 &&\
 RUN sudo apt-get update \
     && sudo apt-get install -y gcc g++ \
     && conda install -y \
-    scikit-learn=0.22.1 \
-    scipy=1.4.1 \
-    pandas=1.0.3 \
+    scikit-learn=0.23 \
+    scipy=1.5.2 \
+    pandas=1.1.3 \
     requests \
     joblib \
     lz4 \
@@ -85,7 +85,7 @@ RUN sudo apt-get update \
     torchtext \
     Python-Deprecated \
     tensorly \
-    pymatgen==2020.3.13 \
+    pymatgen>=2020.10.9 \
     matminer\
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build jupyterlab-plotly \
