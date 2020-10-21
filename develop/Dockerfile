@@ -23,7 +23,7 @@ ENV HOME=/home/user
 WORKDIR /workspace
 
 # Install Miniconda
-RUN curl -so ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+RUN curl -so ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
     && chmod +x ~/miniconda.sh \
     && ~/miniconda.sh -b -p ~/miniconda \
     && rm ~/miniconda.sh \
@@ -87,10 +87,11 @@ RUN sudo apt-get update \
     tensorly \
     pymatgen>=2020.10.9 \
     matminer\
+    ipympl \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build jupyterlab-plotly \
     # && jupyter labextension install --no-build jupyterlab-chart-editor \
-    && jupyter lab build \
+    && jupyter lab build  --dev-build=False --minimize=False\
     && jupyter nbextension enable --py widgetsnbextension \
     && python -c "import numpy; print('numpy %s' % numpy.__version__)" \
     && python -c "import scipy; print('scipy %s' % scipy.__version__)" \
@@ -98,6 +99,11 @@ RUN sudo apt-get update \
     && python -c "import mordred; print('mordred %s' % mordred.__version__)" \
     && python -c "import tensorly; print('tensorly %s' % tensorly.__version__)" \
     && python -c "import pymatgen; print('pymatgen %s' % pymatgen.__version__)" \
+    && python -c "import matminer; print('matminer %s' % matminer.__version__)" \
+    && jupyter lab clean -y \
+    && npm cache clean --force \
+    && rm -rf "/home/user/.cache/yarn" \
+    && rm -rf "/home/user/.node-gyp" \
     && sudo apt-get purge gcc g++ -y\
     && sudo apt-get autoremove -y \
     && sudo apt-get clean -y \ 
