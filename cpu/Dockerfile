@@ -63,6 +63,7 @@ RUN sudo apt-get update \
     scikit-learn=0.23 \
     scipy=1.5.2 \
     pandas=1.1.3 \
+    geopandas=0.8.1 \
     requests \
     joblib \
     lz4 \
@@ -87,6 +88,8 @@ RUN sudo apt-get update \
     pymatgen>=2020.10.9 \
     matminer\
     ipympl \
+    shapely \
+    descartes \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build jupyterlab-plotly \
     # && jupyter labextension install --no-build jupyterlab-chart-editor \
@@ -95,6 +98,8 @@ RUN sudo apt-get update \
     && python -c "import numpy; print('numpy %s' % numpy.__version__)" \
     && python -c "import scipy; print('scipy %s' % scipy.__version__)" \
     && python -c "import pandas; print('pandas %s' % pandas.__version__)" \
+    && python -c "import geopandas; print('geopandas %s' % geopandas.__version__)" \
+    && python -c "import shapely; print('shapely %s' % shapely.__version__)" \
     && python -c "import mordred; print('mordred %s' % mordred.__version__)" \
     && python -c "import tensorly; print('tensorly %s' % tensorly.__version__)" \
     && python -c "import pymatgen; print('pymatgen %s' % pymatgen.__version__)" \
