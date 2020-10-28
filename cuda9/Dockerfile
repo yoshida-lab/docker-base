@@ -67,6 +67,7 @@ RUN sudo apt-get update \
     scipy=1.5.2 \
     pandas=1.1.3 \
     geopandas=0.8.1 \
+    shapely \
     requests \
     joblib \
     lz4 \
@@ -91,7 +92,6 @@ RUN sudo apt-get update \
     pymatgen>=2020.10.9 \
     matminer\
     ipympl \
-    shapely \
     descartes \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build jupyterlab-plotly \
