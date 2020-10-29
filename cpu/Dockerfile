@@ -72,6 +72,7 @@ RUN sudo apt-get update \
     seaborn \
     openpyxl \
     nodejs \
+    numba \
     && conda clean -ya \
     && pip install --upgrade --no-cache-dir \
     git+https://github.com/stanfordmlgroup/ngboost.git \
@@ -90,6 +91,7 @@ RUN sudo apt-get update \
     pymatgen>=2020.10.9 \
     matminer\
     ipympl \
+    umap-learn \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build jupyterlab-plotly \
     # && jupyter labextension install --no-build jupyterlab-chart-editor \
