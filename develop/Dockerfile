@@ -81,6 +81,7 @@ RUN sudo apt-get update \
     jupyterlab \
     ipywidgets \
     widgetsnbextension \
+    OpenNMT-py==2.0.0rc2 \
     fastcluster \
     xgboost \
     plotly \
