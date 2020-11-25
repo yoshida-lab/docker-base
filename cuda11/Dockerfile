@@ -22,6 +22,7 @@ USER user
 ENV HOME=/home/user
 WORKDIR /workspace
 
+
 # Install Miniconda
 RUN curl -so ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
     && chmod +x ~/miniconda.sh \
@@ -41,8 +42,7 @@ ENV CONDA_DEFAULT_ENV=py37
 ENV CONDA_PREFIX=/home/user/miniconda/envs/$CONDA_DEFAULT_ENV
 ENV PATH=$CONDA_PREFIX/bin:$PATH
 
-# install pytorch 1.7.0 with CUDA 11.0
-# use CUDA 10.0-specific steps
+# install ppytorch 1.0.0 with CUDA 10.0
 RUN conda install -y -c pytorch \
     cudatoolkit=11.0.221 \
     magma-cuda110=2.5.2 \

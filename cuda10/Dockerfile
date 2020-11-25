@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.1-base
+FROM nvidia/cuda:10.2-base
 
 # Install some basic utilities
 RUN apt-get update && apt-get install -y \
@@ -42,14 +42,13 @@ ENV CONDA_DEFAULT_ENV=py37
 ENV CONDA_PREFIX=/home/user/miniconda/envs/$CONDA_DEFAULT_ENV
 ENV PATH=$CONDA_PREFIX/bin:$PATH
 
-# install ppytorch 1.0.0 with CUDA 10.0
-# use CUDA 10.0-specific steps
+# install pytorch 1.7.0 with CUDA 10.2
 RUN conda install -y -c pytorch \
-    cudatoolkit=10.1 \
-    magma-cuda101=2.5.2 \
-    pytorch=1.6.0 \
-    torchtext=0.7.0 \
-    torchvision=0.7.0 &&\
+    cudatoolkit=10.2 \
+    magma-cuda102=2.5.2 \
+    pytorch=1.7.0 \
+    torchtext=0.8.0 \
+    torchvision=0.8.1 &&\
     conda clean -ya && \
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 
