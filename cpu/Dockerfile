@@ -76,10 +76,12 @@ RUN sudo apt-get update \
     && pip install --upgrade --no-cache-dir \
     git+https://github.com/stanfordmlgroup/ngboost.git \
     && pip install --no-cache-dir \
+    pytest \
     jupyterlab \
     ipywidgets \
     widgetsnbextension \
     OpenNMT-py==1.2.0 \
+    optuna \
     fastcluster \
     xgboost \
     plotly \
