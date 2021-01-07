@@ -60,8 +60,8 @@ RUN sudo apt-get update \
     && sudo apt-get install -y gcc g++ \
     && conda install -y \
     scikit-learn=0.23 \
-    scipy=1.5.2 \
-    pandas=1.1.3 \
+    scipy=1.5 \
+    pandas=1.2 \
     geopandas=0.8.1 \
     shapely \
     descartes \
@@ -94,6 +94,7 @@ RUN sudo apt-get update \
     matminer\
     ipympl \
     umap-learn \
+    minepy \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build jupyterlab-plotly \
     # && jupyter labextension install --no-build jupyterlab-chart-editor \
