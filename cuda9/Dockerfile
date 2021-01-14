@@ -96,6 +96,7 @@ RUN sudo apt-get update \
     pymatgen>=2020.10.9 \
     matminer\
     ipympl \
+    GPy \
     umap-learn \
     minepy \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
