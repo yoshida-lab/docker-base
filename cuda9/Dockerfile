@@ -79,10 +79,12 @@ RUN sudo apt-get update \
     && pip install --upgrade --no-cache-dir \
     git+https://github.com/stanfordmlgroup/ngboost.git \
     && pip install --no-cache-dir \
+    pytest \
     jupyterlab \
     ipywidgets \
     widgetsnbextension \
     OpenNMT-py==1.2.0 \
+    optuna \
     fastcluster \
     xgboost \
     plotly \
@@ -94,7 +96,9 @@ RUN sudo apt-get update \
     pymatgen>=2020.10.9 \
     matminer\
     ipympl \
+    GPy \
     umap-learn \
+    minepy \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build jupyterlab-plotly \
     # && jupyter labextension install --no-build jupyterlab-chart-editor \
