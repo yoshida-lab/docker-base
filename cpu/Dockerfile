@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 # Install some basic utilities
 RUN apt-get update && apt-get install -y \
@@ -41,12 +41,12 @@ ENV CONDA_DEFAULT_ENV=py37
 ENV CONDA_PREFIX=/home/user/miniconda/envs/$CONDA_DEFAULT_ENV
 ENV PATH=$CONDA_PREFIX/bin:$PATH
 
-# install pytorch 1.7.0 without CUDA
+# install pytorch 1.7.1 without CUDA
 RUN conda install -y -c pytorch \
     cpuonly \
-    pytorch=1.7.0 \
-    torchtext=0.8.0 \
-    torchvision=0.8.1 &&\
+    pytorch=1.7.1 \
+    torchtext=0.8.1 \
+    torchvision=0.8.2 &&\
     conda clean -ya && \
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 
@@ -59,9 +59,9 @@ RUN conda install -y -c rdkit rdkit=2020.03.1.0 &&\
 RUN sudo apt-get update \
     && sudo apt-get install -y gcc g++ \
     && conda install -y \
-    scikit-learn=0.23 \
+    scikit-learn=0.23.2 \
     scipy=1.5.2 \
-    pandas=1.1.3 \
+    pandas=1.2.1 \
     geopandas=0.8.1 \
     shapely \
     descartes \
