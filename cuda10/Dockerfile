@@ -76,7 +76,7 @@ RUN sudo apt-get update \
     numba \
     && conda clean -ya \
     && pip install --upgrade --no-cache-dir \
-    git+https://github.com/stanfordmlgroup/ngboost.git \
+    git+https://github.com/stanfordmlgroup/ngboost.git --ignore-installed llvmlite\
     && pip install --no-cache-dir \
     pytest \
     jupyterlab \
