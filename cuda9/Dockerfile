@@ -55,7 +55,7 @@ RUN conda install -y -c pytorch \
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 
 # install rdkit and pymatgen
-RUN conda install -y -c rdkit rdkit=2020.09.1.0 &&\
+RUN conda install -y -c rdkit rdkit=2020.03.3.0 &&\
     conda clean -ya && \
     python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem"
 
