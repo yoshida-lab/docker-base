@@ -3,6 +3,7 @@ FROM nvidia/cuda:9.2-base
 # Install some basic utilities
 RUN apt-get update && apt-get install -y \
     curl \
+    build-essential \
     ca-certificates \
     openssh-client \
     git \
@@ -54,18 +55,16 @@ RUN conda install -y -c pytorch \
     python -c "import torch; print('pytorch %s' % torch.__version__)"
 
 # install rdkit and pymatgen
-RUN conda install -y -c rdkit rdkit=2020.03.1.0 &&\
+RUN conda install -y -c rdkit rdkit=2020.09.1.0 &&\
     conda clean -ya && \
     python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem"
 
 # install other packages
-RUN sudo apt-get update \
-    && sudo apt-get install -y gcc g++ \
-    && conda install -y \
+RUN echo "\nInstall using conda -------------------------" \
+    && conda install -y -c defaults \
     scikit-learn=0.23.2 \
     scipy=1.5.2 \
     pandas=1.2.1 \
-    geopandas=0.8.1 \
     shapely \
     descartes \
     requests \
@@ -75,30 +74,31 @@ RUN sudo apt-get update \
     openpyxl \
     nodejs \
     numba \
-    && conda clean -ya \
-    && pip install --upgrade --no-cache-dir \
-    git+https://github.com/stanfordmlgroup/ngboost.git --ignore-installed llvmlite\
-    && pip install --no-cache-dir \
     pytest \
     jupyterlab \
     ipywidgets \
     widgetsnbextension \
-    OpenNMT-py==1.2.0 \
+    plotly \
+    && conda clean -ya \
+    && echo "\nInstall using pip -------------------------" \
+    && pip install --no-cache-dir \
+    geopandas \
     optuna \
     fastcluster \
     xgboost \
-    plotly \
     pybtex \
     mordred \
-    torchtext \
-    Python-Deprecated \
     tensorly \
-    pymatgen>=2020.10.9 \
-    matminer\
+    pymatgen \
+    matminer \
     ipympl \
     GPy \
     umap-learn \
     minepy \
+    ngboost \
+    OpenNMT-py==1.2.0 \
+    Python-Deprecated \
+    && echo "\nInstall labextension -------------------------" \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build jupyterlab-plotly \
     # && jupyter labextension install --no-build jupyterlab-chart-editor \
@@ -113,13 +113,11 @@ RUN sudo apt-get update \
     && python -c "import tensorly; print('tensorly %s' % tensorly.__version__)" \
     && python -c "import pymatgen; print('pymatgen %s' % pymatgen.__version__)" \
     && python -c "import matminer; print('matminer %s' % matminer.__version__)" \
+    && echo "\nCleanup -------------------------" \
     && jupyter lab clean -y \
     && npm cache clean --force \
     && rm -rf "/home/user/.cache/yarn" \
     && rm -rf "/home/user/.node-gyp" \
-    && sudo apt-get purge gcc g++ -y\
-    && sudo apt-get autoremove -y \
-    && sudo apt-get clean -y \ 
     && sudo rm -rf /var/lib/apt/lists/* 
 
 # allow matplotlib working in docker
