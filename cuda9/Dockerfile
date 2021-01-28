@@ -65,6 +65,7 @@ RUN echo "\nInstall using conda -------------------------" \
     scikit-learn=0.23.2 \
     scipy=1.5.2 \
     pandas=1.2.1 \
+    jedi=0.17.2 \
     shapely \
     descartes \
     requests \
