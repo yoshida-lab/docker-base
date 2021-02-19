@@ -24,47 +24,43 @@ ENV HOME=/home/user
 WORKDIR /workspace
 
 
-# Install Miniconda
-RUN curl -so ~/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
-    && chmod +x ~/miniconda.sh \
-    && ~/miniconda.sh -b -p ~/miniconda \
-    && rm ~/miniconda.sh \
-    && /home/user/miniconda/bin/conda update -n base -c defaults conda \
+# Install Mambaforge (move from Miniconda)
+RUN curl -so ~/mambaforge.sh -L https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh \
+    && chmod +x ~/mambaforge.sh \
+    && ~/mambaforge.sh -b -p ~/mambaforge \
+    && rm ~/mambaforge.sh \
     && umask 000
-ENV PATH=/home/user/miniconda/bin:$PATH
+ENV PATH=/home/user/mambaforge/condabin:$PATH
 ENV CONDA_AUTO_UPDATE_CONDA=false
 
-# Create a Python 3.7 environment
-RUN /home/user/miniconda/bin/conda update -n base -c defaults conda \
-    && /home/user/miniconda/bin/conda install conda-build \
-    && /home/user/miniconda/bin/conda create -y --name py37 python=3.7 \
-    && /home/user/miniconda/bin/conda clean -ya
-ENV CONDA_DEFAULT_ENV=py37
-ENV CONDA_PREFIX=/home/user/miniconda/envs/$CONDA_DEFAULT_ENV
+# Create a Python 3.8 environment
+RUN /home/user/mambaforge/condabin/mamba update -n base mamba conda \
+    && /home/user/mambaforge/condabin/mamba install conda-build \
+    && /home/user/mambaforge/condabin/mamba create -y --name py38 python=3.8 \
+    && /home/user/mambaforge/condabin/mamba clean -ya
+ENV CONDA_DEFAULT_ENV=py38
+ENV CONDA_PREFIX=/home/user/mambaforge/envs/$CONDA_DEFAULT_ENV
 ENV PATH=$CONDA_PREFIX/bin:$PATH
 
 # install pytorch 1.7.1 with CUDA 10.2
-RUN conda install -y -c pytorch \
+RUN conda install -y -n py38 -c pytorch \
     cudatoolkit=10.2 \
     magma-cuda102=2.5.2 \
     pytorch=1.7.1 \
     torchtext=0.8.1 \
-    torchvision=0.8.2 &&\
-    conda clean -ya && \
-    python -c "import torch; print('pytorch %s' % torch.__version__)"
-
-# install rdkit and pymatgen
-RUN conda install -y -c rdkit rdkit=2020.03.3.0 &&\
-    conda clean -ya && \
-    python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem"
+    # torchvision=0.8.2 \
+    && mamba clean -ya \
+    && python -c "import torch; print('pytorch %s' % torch.__version__)"
 
 # install other packages
-RUN echo "\nInstall using conda -------------------------" \
-    && conda install -y -c defaults \
-    scikit-learn=0.23.2 \
-    scipy=1.5.2 \
-    pandas=1.2.1 \
-    jedi=0.17.2 \
+RUN echo "\nInstall using mamba -------------------------" \
+    && mamba install -y -n py38 \
+    'libblas=*=*mkl' \
+    rdkit=2020.09.4 \
+    scikit-learn=0.24 \
+    scipy=1.6 \
+    pandas=1.2 \
+    jedi>=0.16 \
     shapely \
     descartes \
     requests \
@@ -79,9 +75,6 @@ RUN echo "\nInstall using conda -------------------------" \
     ipywidgets \
     widgetsnbextension \
     plotly \
-    && conda clean -ya \
-    && echo "\nInstall using pip -------------------------" \
-    && pip install --no-cache-dir \
     geopandas \
     optuna \
     fastcluster \
@@ -96,6 +89,9 @@ RUN echo "\nInstall using conda -------------------------" \
     umap-learn \
     minepy \
     ngboost \
+    && mamba clean -ya \
+    && echo "\nInstall using pip -------------------------" \
+    && pip install --no-cache-dir \
     OpenNMT-py==1.2.0 \
     Python-Deprecated \
     && echo "\nInstall labextension -------------------------" \
@@ -106,6 +102,7 @@ RUN echo "\nInstall using conda -------------------------" \
     && jupyter nbextension enable --py widgetsnbextension \
     && python -c "import numpy; print('numpy %s' % numpy.__version__)" \
     && python -c "import scipy; print('scipy %s' % scipy.__version__)" \
+    && python -c "import sklearn; print('sklearn %s' % sklearn.__version__)" \
     && python -c "import pandas; print('pandas %s' % pandas.__version__)" \
     && python -c "import geopandas; print('geopandas %s' % geopandas.__version__)" \
     && python -c "import shapely; print('shapely %s' % shapely.__version__)" \
@@ -113,6 +110,7 @@ RUN echo "\nInstall using conda -------------------------" \
     && python -c "import tensorly; print('tensorly %s' % tensorly.__version__)" \
     && python -c "import pymatgen; print('pymatgen %s' % pymatgen.__version__)" \
     && python -c "import matminer; print('matminer %s' % matminer.__version__)" \
+    && python -c "import rdkit; print('rdkit %s' % rdkit.__version__); from rdkit import Chem" \
     && echo "\nCleanup -------------------------" \
     && jupyter lab clean -y \
     && npm cache clean --force \
