@@ -44,7 +44,7 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 
 # install ppytorch 1.7.1 with CUDA 11.0
 RUN conda install -y -n py38 -c pytorch \
-    cudatoolkit=11.0.221 \
+    cudatoolkit=11.0 \
     magma-cuda110=2.5.2 \
     pytorch=1.7.1 \
     torchtext=0.8.1 \
