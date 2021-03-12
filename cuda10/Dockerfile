@@ -82,7 +82,7 @@ RUN echo "\nInstall using mamba -------------------------" \
     pybtex \
     mordred \
     tensorly \
-    'pymatgen>=2020.10.9,<2022.0' \
+    'pymatgen>=2020.10.9' \
     matminer \
     ipympl \
     GPy \
