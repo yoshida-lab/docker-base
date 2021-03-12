@@ -56,7 +56,7 @@ RUN conda install -y -n py38 -c pytorch \
 RUN echo "\nInstall using mamba -------------------------" \
     && mamba install -y -n py38 \
     'libblas=*=*mkl' \
-    rdkit=2020.09.4 \
+    rdkit=2020.09.5 \
     scikit-learn=0.24 \
     scipy=1.6 \
     pandas=1.2 \
@@ -82,7 +82,7 @@ RUN echo "\nInstall using mamba -------------------------" \
     pybtex \
     mordred \
     tensorly \
-    pymatgen \
+    'pymatgen>=2020.10.9,<2022.0' \
     matminer \
     ipympl \
     GPy \
