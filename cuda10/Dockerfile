@@ -93,6 +93,7 @@ RUN echo "\nInstall using mamba -------------------------" \
     && echo "\nInstall using pip -------------------------" \
     && pip install --no-cache-dir \
     OpenNMT-py==1.2.0 \
+    matid \
     Python-Deprecated \
     && echo "\nInstall labextension -------------------------" \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \

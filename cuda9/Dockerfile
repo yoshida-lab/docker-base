@@ -95,6 +95,7 @@ RUN echo "\nInstall using mamba -------------------------" \
     && pip install --no-cache-dir \
     OpenNMT-py==1.2.0 \
     Python-Deprecated \
+    matid \
     && echo "\nInstall labextension -------------------------" \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build jupyterlab-plotly \
