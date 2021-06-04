@@ -43,10 +43,10 @@ ENV CONDA_PREFIX=/home/user/mambaforge/envs/$CONDA_DEFAULT_ENV
 ENV PATH=$CONDA_PREFIX/bin:$PATH
 
 # install ppytorch 1.7.1 with CUDA 11.0
-RUN conda install -y -n py38 -c pytorch \
-    cudatoolkit=11.0 \
-    magma-cuda110=2.5.2 \
-    pytorch=1.7.1 \
+RUN conda install -y -n py38 -c pytorch -c nvidia \
+    cudatoolkit=11.1 \
+    magma-cuda111=2.5.2 \
+    pytorch=1.8.1 \
     torchtext=0.8.1 \
     # torchvision=0.8.2 \
     && mamba clean -ya \
@@ -89,12 +89,12 @@ RUN echo "\nInstall using mamba -------------------------" \
     umap-learn \
     minepy \
     ngboost \
+    matid \
     && mamba clean -ya \
     && echo "\nInstall using pip -------------------------" \
     && pip install --no-cache-dir \
     OpenNMT-py==1.2.0 \
     Python-Deprecated \
-    matid \
     && echo "\nInstall labextension -------------------------" \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
     && jupyter labextension install --no-build jupyterlab-plotly \

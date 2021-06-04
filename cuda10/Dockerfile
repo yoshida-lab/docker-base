@@ -46,7 +46,7 @@ ENV PATH=$CONDA_PREFIX/bin:$PATH
 RUN conda install -y -n py38 -c pytorch \
     cudatoolkit=10.2 \
     magma-cuda102=2.5.2 \
-    pytorch=1.7.1 \
+    pytorch=1.8.1 \
     torchtext=0.8.1 \
     # torchvision=0.8.2 \
     && mamba clean -ya \
@@ -89,11 +89,11 @@ RUN echo "\nInstall using mamba -------------------------" \
     umap-learn \
     minepy \
     ngboost \
+    matid \
     && mamba clean -ya \
     && echo "\nInstall using pip -------------------------" \
     && pip install --no-cache-dir \
     OpenNMT-py==1.2.0 \
-    matid \
     Python-Deprecated \
     && echo "\nInstall labextension -------------------------" \
     && jupyter labextension install --no-build @jupyter-widgets/jupyterlab-manager \
